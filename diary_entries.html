@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body id="diary">
+	<div class="row">
+		<ul class="nav">
+			<li><a href="index1.html">HOME</a></li>
+			<li class="active"><a href="diary_entries.html">CREATE ENTRIES</a></li>
+			<li><a href="view_entries.html">VIEW ENTRIES</a></li>
+			<li><a href="login1.html">LOGOUT</a></li>
+		</ul>
+	</div>
+	<div class="entry-a">
+         <p> DIARY ENTRIES</p>
+          <p>
+          	<label for="title"><small>Title</small></label> &nbsp;
+            <input type="text" name="title" id="title" value="" size="22" /> 
+          </p>
+          <p>
+          	<label for="date">Date</label> &nbsp;
+          	<input type="datetime-local" name="entry date" placeholder="DATE">
+          	 
+          </p>
+          <p>
+            <textarea name="text" id="text" cols="70%" rows="15"></textarea>
+            <label for="Text" style="display:none;"><small>Comment (required)</small></label>
+          </p>
+          <p>
+            <input name="submit" type="submit" id="submit" value="Submit" />
+            
+          </p>
+          
+       </div>
+
+</body>
+</html>
