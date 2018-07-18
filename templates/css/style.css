@@ -1,0 +1,307 @@
+	
+body {
+    background: url("pic.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 18px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	color: white;
+}
+
+h1#title {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 400;
+	font-size: 3.2em;
+	color: white;
+	margin: 0 auto;
+	padding-top: 180px;
+	max-width: 300px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+	/*mix-blend-mode: multiply;*/
+}
+
+h1#title span span {
+	font-weight: 400;
+	/*mix-blend-mode: multiply;*/
+}
+
+h2 {
+	text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 24px;
+	line-height: 2.8em;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	color: grey;
+}	
+
+p.small {
+	font-size: 0.8em;
+	margin: 20px 0 0;
+}
+
+.login-box {
+	background-color: white;
+	max-width: 350px;
+	margin: 0 auto;
+	position: relative;
+	top: 0px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.login-box .box-header {
+	background-color: black;
+	margin-top: 0;
+	border-radius: 5px 5px 0 0;
+}
+
+.login-box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: black;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+.login-box input {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 1px;
+	font-size: .9em;
+	border-color: black;
+	
+}
+
+.login-box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: black;
+	
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+}
+#register{
+	background: url("pic.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 18px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	color: white;
+}
+.register-box{
+	background-color: white;
+	max-width: 380px;
+	margin: 0 auto;
+	position: relative;
+	top: 0px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	text-align: center;
+}
+.register-box .box-header {
+	background-color: black;
+	margin-top: 0;
+	border-radius: 5px 5px 0 0;
+
+}
+.register-box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: black;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+.register-box input {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 1px;
+	font-size: .9em;
+	border-color: black;
+}
+.register-box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: black;
+	
+}
+.register-box button:hover {
+	opacity: 0.7;
+}
+#main{
+	background: url("pic.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 18px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	color: white;
+}	
+.row {
+	max-width: 1600px;
+	margin: auto;
+}
+.nav {
+	float: right;
+	margin-top: 0px;
+	list-style: none;
+}
+.nav li{
+	display: inline-block;
+}
+.nav li a{
+	color: black;
+	padding: 5px 20px;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	letter-spacing: 1px;
+}
+.nav li a:hover{
+	opacity: 0.7;
+}
+
+#diary{
+	background: url("pic.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 18px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 500;
+	color: white;
+}
+.button1{
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	
+	left:500px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: black;
+}	
+.button2{
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	
+	left:800px;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: black;
+}
+/*@media only screen and (max-width:800px) {
+	 /* For tablets: */
+	/*.buttton1{
+		width: 80%;
+		padding: 0;
+	}
+	.button2{
+		width: 80%;
+		padding: 0;
+	}
+	.entry{
+		width: 80%;
+		padding: 0;
+		}
+	/*#main {
+		width: 80%;
+		padding: 0;
+	}*/	
+.entry{
+	background-color:black;
+	opacity: 0.8;
+	max-width: 650px;
+	max-height: 1600px;
+	margin: 0 auto;
+	position: relative;
+	top: 100px;
+	height: 350px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	text-align: center;
+}
+.entry-a{
+	background-color:black;
+	opacity: 0.8;
+	max-width: 650px;
+	margin: 0 auto;
+	position: relative;
+	top: 100px;
+	height: 380px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	text-align: center;
+}
+#deco {
+	border-collapse: collapse;
+	width: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.table li {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.table .table-header {
+  background-color: grey;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.table .table-row {
+  background-color: black;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+.table .col-1 {
+  flex-basis: 10%;
+}
+.table .col-2 {
+  flex-basis: 40%;
+}
+.table .col-3 {
+  flex-basis: 25%;
+}
+.table .col-4 {
+  flex-basis: 25%;
+}
+
