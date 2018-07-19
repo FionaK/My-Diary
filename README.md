@@ -1,6 +1,7 @@
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/edcdf0ad2ec49ea2e97b)
 [![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)](https://travis-ci.org/travis-ci/travis-web)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c418889a39e570ccd2c5/maintainability)](https://codeclimate.com/github/FionaK/My-Diary/maintainability)
 
 # My-Diary
   > Online diary that allows a user to make new entries, delete or modify an existing entry.
