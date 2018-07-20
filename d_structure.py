@@ -18,7 +18,7 @@ def register():
 	password=request.get_json()['password']
 	email=request.get_json()['email']
 	details.update({username:{"name":name,"email":email,"pass_wd":password}})
-	return jsonify(details)
+	return jsonify({"message": "successfully registered"}), 200 
 
 @app.route('/api/v1/login/', methods= ['POST', 'GET'])
 def login():
@@ -32,7 +32,7 @@ def login():
 		else:
 			return jsonify({'message': "Incorrect password"})
 	else:
-		return jsonify({'message':"Invalid Username"})
+		return jsonify({'message':"Invalid Username"}), 200
 		
 
 @app.route('/api/v1/create_entry/', methods= ['POST', 'GET'])
@@ -51,7 +51,7 @@ def display_entry():
 
 @app.route('/api/v1/single_entry/<int:entryid>', methods=['GET'])	
 def single_entry(entryid):
-		return jsonify (entries[entryid])
+		return jsonify (entries[entryid]), 200
 
 
 @app.route('/api/v1/delete_entry/<int:entryid>', methods=['DELETE'])
@@ -66,7 +66,14 @@ def modify_entry(entryid):
 	del entries[entryid]
 	entries.update({entryid:{title:entry}})
 
-	return jsonify (entries)
+	return jsonify (entries), 200
+
+@app.route('/api/v1/get_user/', methods=['GET'])
+def get_user():
+ 
+	return jsonify(details), 200
+
+
 
 if __name__	== '__main__':
 	app.run(debug=True)
