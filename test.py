@@ -19,9 +19,10 @@ class EndpointsTestCase (unittest.TestCase):
 
 	#test create_entry
 	def test_create_entry(self):
-		tester = app.test_client(self)
-		response =tester.get('/api/v1/create_entry/', content_type='application/json')
-		self.assertEqual(response.status_code, 400)
+		with app.test_client(self) as tester:
+			response =tester.get('/api/v1/create_entry/', content_type='application/json')
+			self.assertEqual(response.status_code, 400)
+			self.assertEqual(tester.get('api/vi/create_entry').status_code, 404)
 
 	#test display_entry
 	def test_display_entry(self):
