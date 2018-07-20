@@ -17,8 +17,11 @@ def register():
 	username=request.get_json()['username']
 	password=request.get_json()['password']
 	email=request.get_json()['email']
-	details.update({username:{"name":name,"email":email,"pass_wd":password}})
-	return jsonify({"message": "successfully registered"}), 200 
+	if username in details:
+		return jsonify ({"message": "username exists"})
+	else:
+		details.update({username:{"name":name,"email":email,"pass_wd":password}})
+		return jsonify({"message": "successfully registered"}), 200 
 
 @app.route('/api/v1/login/', methods= ['POST', 'GET'])
 def login():
