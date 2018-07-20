@@ -31,15 +31,15 @@ class EndpointsTestCase (unittest.TestCase):
 	#test display_entry
 	def test_display_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/display_entry/', content_type='application/json')
+		response = tester.get('/api/v1/display_entry/', methods=['GET'])
 		self.assertEqual(response.status_code, 200)
 
 
 	#test delete entry
 	def test_delete_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/delete_entry/', content_type='application/json')
-		self.assertEqual(response.status_code, 200)
+		response = tester.get('/api/v1/delete_entry/', METHODS=['POST'])
+		self.assertEqual(response.status_code, 405)
 
 	#test modify entry
 	def test_modify_entry(self):
@@ -51,7 +51,7 @@ class EndpointsTestCase (unittest.TestCase):
 	#test get user details
 	def test_get_user(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/modify_entry/', content_typr='application/json')
+		response = tester.get('/api/v1/modify_entry/')
 		self.assertEqual(response.status_code, 200)
 
 if __name__	== '__main__':
