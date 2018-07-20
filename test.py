@@ -21,22 +21,17 @@ class EndpointsTestCase (unittest.TestCase):
 	def test_create_entry(self):
 		tester = app.test_client(self)
 		response =tester.get('/api/v1/create_entry/', content_type='application/json')
-			
-
 		self.assertEqual(response.status_code, 400)
 
 	#test display_entry
 	def test_display_entry(self):
-		tester = app.test_client(self)
-		
-		self.assertEqual(tester.get('/api/v1/display_entry/').status_code, 200)
+		self.assertEqual(app.test_client(self).get('/api/v1/display_entry/').status_code, 200)
 
 
 	#test delete entry
 	def test_delete_entry(self):
-		tester = app.test_client(self)
-		response = tester.get('/api/v1/delete_entry/4')
-		self.assertEqual(response.status_code, 405)
+		with app.test_client(self) as tester:
+			self.assertEqual(tester.get('/api/v1/delete_entry/4').status_code, 405)
 
 	#test modify entry
 	def test_modify_entry(self):
