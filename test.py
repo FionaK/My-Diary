@@ -45,6 +45,7 @@ class EndpointsTestCase (unittest.TestCase):
 		tester = app.test_client(self)
 		response = tester.get('/api/v1/get_user/')
 		self.assertEqual(response.status_code, 200)
+		self.assertEqual(tester.get('/api/vi/get_user/').status_code, 404)
 
 	# test login
 	def test_login(self):
