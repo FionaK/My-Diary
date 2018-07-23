@@ -54,4 +54,8 @@ source venv/bib/activate
 * /api/v1/single_entry/ - get a single entry
 * /api/v1/delete_entry/ - delete an entry
 * /api/v1/modify_entry/ - modify an entry
+```sh
+   > title
+   > entry
+```
 
