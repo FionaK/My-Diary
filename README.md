@@ -38,8 +38,18 @@ source venv/bib/activate
 ####Endpoints
 * /api/v1/ - home endpoint
 * /api/v1/register/ - register
+```sh
+   > name
+   > username
+   >  password
+   > email
+```
 * /api/v1/login/ - login
 * /api/v1/create_entry/ - creating a new entry
+```sh
+   > title
+   > entry
+```
 * /api/v1/display_entry/ - get all entries
 * /api/v1/single_entry/ - get a single entry
 * /api/v1/delete_entry/ - delete an entry
