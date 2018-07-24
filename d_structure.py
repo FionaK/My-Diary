@@ -13,19 +13,18 @@ def home():
 
 @app.route('/api/v1/register/', methods= ['POST', 'GET'])
 def register():
-	name=request.get_json()['name']
-	username=request.get_json()['username']
-	password=request.get_json()['password']
-	email=request.get_json()['email']
-	if name== '' or password== '' or email== '' is Empty():
-		try:
-			if username in details:
-				return jsonify ({"message": "username exists"})
-			else:
-				details.update({username:{"name":name,"email":email,"pass_wd":password}})
-				return jsonify({"message": "successfully registered"}), 200 
-		except:
-				return jsonify({'message':'Field can not be empty'})
+	try:
+		name=request.get_json()['name']
+		username=request.get_json()['username']
+		password=request.get_json()['password']
+		email=request.get_json()['email']
+		if username in details:
+			return jsonify ({"message": "username exists"})
+		else:
+			details.update({username:{"name":name,"email":email,"pass_wd":password}})
+			return jsonify({"message": "successfully registered"}), 200 
+	except:
+		return jsonify({'message':'Field can not be empty'})
 			
 
 
