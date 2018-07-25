@@ -1,7 +1,7 @@
 from flask import Blueprint, Flask
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'fifi'
+app= Flask(__name__)
+app.secret_key = 'fifi'
 
 from users.views import users_blueprint
 from entries.views import entries_blueprint
