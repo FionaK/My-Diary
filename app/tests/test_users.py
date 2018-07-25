@@ -4,6 +4,7 @@ import json
 
 class Users_TestCase(unittest.TestCase):
 
+    #test login
 	def test_login(self):
 		tester= app.test_client(self)
 		response = tester.get('/api/v1/login/')
