@@ -1,8 +1,9 @@
 import unittest
-from entries.views import *
-import json
+import os,sys
+sys.path.insert(0, os.path.abspath(".."))
+from __init__ import *
 
-class Entries_TestCase (unittest.TestCase):
+class EntriesTestCase (unittest.TestCase):
 	def test_home(self):
 		tester= app.test_client(self)
 		response= tester.get('/api/v2/', content_type='application/json')
@@ -10,19 +11,35 @@ class Entries_TestCase (unittest.TestCase):
 
 	def test_create_entry(self):
 		with app.test_client(self) as tester:
-			response =tester.get('/api/v1/create_entry/', content_type='application/json')
-			self.assertEqual(response.status_code, 400)
-			self.assertEqual(tester.get('api/vi/create_entry').status_code, 404)
+			response =tester.get('/api/v2/create_entry/')
+			self.assertEqual(tester.get('api/v2/create_entry').status_code, 405)
 
 	def test_display_entry(self):
-		self.assertEqual(app.test_client(self).get('/api/v1/display_entry/').status_code, 200)
+		self.assertEqual(app.test_client(self).get('/api/v2/display_entry/').status_code, 403)
 
 	def test_single_entry(self):
 		tester= app.test_client(self)
-		response= tester.get('api/v2/single_entry/', content_type='application/json')
-		self.assertEqual(response.status_code, 200)
+		response= tester.get('api/v2/single_entry/4', 
+			content_type='application/json')
+		self.assertEqual(response.status_code, 403)
 
-	if __name__ == '__main__':
-		unittest.run()
+	def test_delete_entry(self):
+		with app.test_client(self) as tester:
+			response = tester.get('/api/v2/delete_entry/', content_type='application/json')
+			self.assertEqual(response.status_code, 404)
+
+	def test_modify_entry(self):
+		tester= app.test_client(self)
+		response = tester.get(
+			'api/v2/modify_entry/3'
+			,content_type='application/json')
+		self.assertEqual(response.status_code, 405)
+					
+		
+
+if __name__ == '__main__':
+	unittest.main()
+
+
 		
 		
