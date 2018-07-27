@@ -1,3 +1,7 @@
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/edcdf0ad2ec49ea2e97b)
+[![Build Status](https://travis-ci.org/travis-ci/travis-web.svg?branch=challenge3)](https://travis-ci.org/travis-ci/travis-web)
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c418889a39e570ccd2c5/maintainability)](https://codeclimate.com/github/FionaK/My-Diary/maintainability)
 # My-Diary
   > Online diary that allows a user to make new entries, delete or modify an existing entry.
 
@@ -31,6 +35,16 @@ pip install -r requirements.txt
 * Run
 ```sh
 python run.py to start the server
+```
+* Open postgreSQL, start its server and create a database called 'diary'
+```sh
+$ service postgresql start
+$ sudo -u postgres psql
+$ CREATE DATABASE diary;
+```
+* On the models.py file edit this with your details;
+```sh
+conn = psycopg2.connect("dbname='diary' user = '' password = '' host = 'localhost' port = '5432'")
 ```
 
 ###Endpoints
