@@ -35,7 +35,7 @@ def valid_password(password):
 
 
 
-@users_blueprint.route('/api/v2/register/', methods= ['POST', 'GET'])
+@users_blueprint.route('/api/v2/register/', methods= ['POST'])
 def register():
 	try:
 		name=request.get_json()['name']
@@ -71,7 +71,7 @@ def register():
 	except KeyError:
 		return jsonify({'message':'Field can not be blank'}), 406
 
-@users_blueprint.route('/api/v2/login/', methods= ['POST', 'GET'])
+@users_blueprint.route('/api/v2/login/', methods= ['POST'])
 def login():
 	username=request.get_json()['username']
 	password=base64.b64encode(bytes(request.get_json()['password']))
