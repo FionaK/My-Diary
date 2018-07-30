@@ -87,4 +87,8 @@ http://127.0.0.1:5000/api/v2/modify_entry/2?access_token={}
 ```sh
 http://127.0.0.1:5000/api/v2/get_user/?access_token={}
 ```
+### heroku link
+```sh
+https://trydiary.herokuapp.com/api/v2/
+```
 
