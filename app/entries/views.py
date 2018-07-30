@@ -11,7 +11,7 @@ entries_blueprint = Blueprint('entries', __name__)
 def require_auth(k):
 	@wraps(k)
 	def authorization(*args, **kwargs):
-		token = request.args.get('access_token')
+		token = request.headers.get('x-access-token')
 		if not token:
 			return jsonify({'message' : 'Missing Token'}), 403
 		try:
@@ -30,7 +30,7 @@ def create_entry():
 	try:
 		title=request.get_json()['title']
 		entry=request.get_json()['entry']
-		data = jwt.decode(request.args.get('access_token'), 'fifi')
+		data = jwt.decode(request.headers.get('x-access_token'), 'fifi')
 		username = data['user']
 
 		cur.execute("INSERT INTO entries(title,entry,username)VALUES(%s, %s, %s);",(title, entry, username))
@@ -44,7 +44,7 @@ def create_entry():
 @entries_blueprint.route('/api/v2/display_entry/', methods= ['GET'])
 @require_auth
 def display_entry():
-	data = jwt.decode(request.args.get('access_token'), 'fifi')
+	data = jwt.decode(request.headers.get('x-access_token'), 'fifi')
 	username = data['user']
 	cur.execute("SELECT * FROM entries WHERE username = '"+username+"'" )
 	entries=cur.fetchall()
@@ -77,7 +77,7 @@ def delete_entry(entryid):
 def modify_entry(entryid):
 	title=request.get_json()['title']
 	entry=request.get_json()['entry']
-	data = jwt.decode(request.args.get('access_token'), 'fifi')
+	data = jwt.decode(request.headers.get('x-access-token'), 'fifi')
 	username= data['user']
 	cur.execute("SELECT * FROM entries WHERE username = '"+username+"' AND entryid = '"+str(entryid)+"'")
 	result = cur.fetchone()

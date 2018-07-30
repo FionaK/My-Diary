@@ -16,7 +16,7 @@ users_blueprint=Blueprint('users', __name__)
 def require_auth(k):
 	@wraps(k)
 	def authorization(*args, **kwargs):
-		token = request.args.get('access_token')
+		token = request.headers.get('x-access_token')
 		if not token:
 			return jsonify({'message' : 'Missing Token'}), 403
 		try:
@@ -82,7 +82,7 @@ def login():
 		for row in cur.fetchall():
 			if password == row[3]:
 				token= jwt.encode ({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, 'fifi')
-				return jsonify({'message': 'Login successful', 'access_token': token.decode('UTF-8')}), 200
+				return jsonify({'message': 'Login successful', 'x-access_token': token.decode('UTF-8')}), 200
 			else:
 				return jsonify({'message':'wrong password'}), 401
 	else:
