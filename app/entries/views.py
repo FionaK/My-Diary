@@ -38,11 +38,15 @@ def create_entry():
 		return jsonify({'message': 'New entry has been created'}), 200
 	except KeyError:
 		return jsonify({'message':'Field can not be blank'}), 406
+
+
 		
 @entries_blueprint.route('/api/v2/display_entry/', methods= ['GET'])
 @require_auth
 def display_entry():
-	cur.execute("SELECT * FROM entries")
+	data = jwt.decode(request.args.get('access_token'), 'fifi')
+	username = data['user']
+	cur.execute("SELECT * FROM entries WHERE username = '"+username+"'" )
 	entries=cur.fetchall()
 
 	return jsonify(entries), 200
