@@ -7,6 +7,17 @@ python:
 install:
   - pip install r requirements.txt
 
+
+services:
+ - postgresql
+
+before_script:
+ - psql -c 'CREATE DATABASE diary;' -U postgres
+
 script:
-- python test_users.py
-- python test_entry.py
+- pytest
+
+after_success:
+ - coveralls
+
+
