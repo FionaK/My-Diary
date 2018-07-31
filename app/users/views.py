@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, jsonify, request
-from ..models import *
+from app.models import *
 from functools import wraps
 import datetime
 import psycopg2

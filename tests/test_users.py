@@ -1,7 +1,7 @@
 import unittest
 import os,sys
 sys.path.insert(0, os.path.abspath(".."))
-from __init__ import *
+from app import flask_app as app
 
 class Users_TestCase(unittest.TestCase):
 
