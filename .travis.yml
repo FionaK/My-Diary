@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - '3.6'
+  - '3.4'
 
 install:
   - pip install -r requirements.txt
@@ -14,7 +14,7 @@ before_script:
  - psql -c 'CREATE DATABASE diary;' -U postgres
 
 script:
-- pytest
+- python -m unittest -v discover
 
 after_success:
  - coveralls
