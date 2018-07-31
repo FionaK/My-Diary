@@ -11,7 +11,7 @@ services:
  - postgresql
 
 before_script:
- - psql -c 'CREATE DATABASE diary;' -U postgres
+ - psql -c 'create database diary;' -U postgres
 
 script:
 - pytest tests
