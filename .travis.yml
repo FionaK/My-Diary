@@ -14,7 +14,7 @@ before_script:
  - psql -c 'CREATE DATABASE diary;' -U postgres
 
 script:
-- python -m unittest -v discover
+- python -m unittest discover -v
 
 after_success:
  - coveralls
