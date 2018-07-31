@@ -28,12 +28,16 @@ def require_auth(k):
 @require_auth
 def create_entry():
 	try:
-		title=request.get_json()['title']
-		entry=request.get_json()['entry']
+		title=request.get_json()['title'].strip()
+		entry=request.get_json()['entry'].strip()
 		data = jwt.decode(request.headers.get('x-access_token'), 'fifi')
 		username = data['user']
-
-		cur.execute("INSERT INTO entries(title,entry,username)VALUES(%s, %s, %s);",(title, entry, username))
+		cur.execute("SELECT * FROM entries WHERE title = '"+title+"'" )
+		if cur.fetchone() is None:
+			cur.execute("INSERT INTO entries(title,entry,username)VALUES(%s, %s, %s);",(title, entry, username))
+		else:
+			return jsonify({'message': 'Title already exists. Choose another title.'})
+		
 		conn.commit()
 		return jsonify({'message': 'New entry has been created'}), 200
 	except KeyError:
@@ -75,8 +79,8 @@ def delete_entry(entryid):
 @entries_blueprint.route('/api/v2/modify_entry/<int:entryid>', methods= ['PUT'])
 @require_auth
 def modify_entry(entryid):
-	title=request.get_json()['title']
-	entry=request.get_json()['entry']
+	title=request.get_json()['title'].strip()
+	entry=request.get_json()['entry'].strip()
 	data = jwt.decode(request.headers.get('x-access-token'), 'fifi')
 	username= data['user']
 	cur.execute("SELECT * FROM entries WHERE username = '"+username+"' AND entryid = '"+str(entryid)+"'")

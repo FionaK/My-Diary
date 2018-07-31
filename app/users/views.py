@@ -32,18 +32,19 @@ def valid_password(password):
 		return jsonify({'message':'False'})
 	else:
 		return jsonify({'message':'True'})	
-
-
+def valid_email(email):
+	if re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email) != None:
+		return True
+	return False		
 
 @users_blueprint.route('/api/v2/register/', methods= ['POST'])
 def register():
 	try:
-		name=request.get_json()['name']
-		username=request.get_json()['username']
-
-		password=base64.b64encode(bytes(request.get_json()['password']))
-		rpt_password=base64.b64encode(bytes(request.get_json()['repeat_password']))
-		email=request.get_json()['email']
+		name=request.get_json()['name'].strip()
+		username=request.get_json()['username'].strip()
+		password=base64.b64encode(bytes(request.get_json()['password'])).strip()
+		rpt_password=base64.b64encode(bytes(request.get_json()['repeat_password'])).strip()
+		email=request.get_json()['email'].strip()
 		if len(name)==0 or len(email)==0:
 			return jsonify({'message':'This field can not be empty!'}), 406
 		if len(password)<6:
@@ -57,10 +58,14 @@ def register():
 			cur.execute("SELECT * FROM users WHERE username = '"+username+"' OR email = '"+email+"'")
 			if cur.fetchone() is None:
 				if valid_password(password):
-					cur.execute("INSERT INTO users(name,username,password,email)VALUES(%s, %s, %s, %s);",(name, username, password, email))
+					if valid_email(email):
+						cur.execute("INSERT INTO users(name,username,password,email)VALUES(%s, %s, %s, %s);",(name, username, password, email))
+					else:
+						return jsonify({'message':'invalid email format'})
+	
 				else:
 					return jsonify({'message':'wrong password format'})
-					
+			
 			else:
 				return jsonify({'message': 'username or email already taken'}), 409
 			
@@ -73,8 +78,8 @@ def register():
 
 @users_blueprint.route('/api/v2/login/', methods= ['POST'])
 def login():
-	username=request.get_json()['username']
-	password=base64.b64encode(bytes(request.get_json()['password']))
+	username=request.get_json()['username'].strip()
+	password=base64.b64encode(bytes(request.get_json()['password'])).strip()
 
 	cur.execute("SELECT COUNT(1) FROM users WHERE username = '"+username+"'")
 	if cur.fetchone() is not None:
