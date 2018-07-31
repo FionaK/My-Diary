@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/FionaK/My-Diary.svg?branch=challenge3)](https://travis-ci.org/FionaK/My-Diary)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c418889a39e570ccd2c5/maintainability)](https://codeclimate.com/github/FionaK/My-Diary/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/FionaK/My-Diary/badge.svg)](https://coveralls.io/github/FionaK/My-Diary)
 # My-Diary
   > Online diary that allows a user to make new entries, delete or modify an existing entry.
 
@@ -89,6 +90,6 @@ http://127.0.0.1:5000/api/v2/get_user/?access_token={}
 ```
 ### heroku link
 ```sh
-https://trydiary.herokuapp.com/api/v2/
+[link to heroku](https://diary25.herokuapp.com/api/v2/)
 ```
 
