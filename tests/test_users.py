@@ -23,6 +23,22 @@ class Users_TestCase(unittest.TestCase):
 			response = f.get('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register',
 				json={"name":"fiona","username":"fifi","password":"2345","email":"fko@gmail.com"}).status_code, 301)
+
+	def test_logout(self):
+		e = app.test_client(self)
+		response= e.get('/api/v2/logout/', content_type='application/json')
+		self.assertEqual(response.status_code, 200)
+
+	def test_users(self):
+		pass
+		
+	def test_valid_email(self):
+		pass
+	def test_valid_password(self):
+		pass
+	def test_require_auth(self):
+		pass
+
 		
 
 if __name__ == '__main__':

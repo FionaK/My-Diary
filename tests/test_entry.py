@@ -28,15 +28,28 @@ class EntriesTestCase (unittest.TestCase):
 		with app.test_client(self) as k:
 			response = k.get('/api/v2/delete_entry/', content_type='application/json')
 			self.assertEqual(response.status_code, 404)
+		with app.test_client(self) as j:
+			response = j.post('/api/v2/delete_entry/5', content_type='application/json')
+			self.assertEqual(response.status_code, 405)
 
 	def test_modify_entry(self):
 		t = app.test_client(self)
 		response = t.get(
 			'api/v2/modify_entry/3'
-			,content_type='application/json')
+			,content_type='application/json',)
 		self.assertEqual(response.status_code, 405)
 					
-		
+	def test_wrong_method(self):
+		z = app.test_client(self)
+		response = z.post(
+			'api/v2/modify_entry/4',)
+		self.assertEqual(response.status_code, 405)
+
+	def test_require_auth(self):
+		pass
+
+	def test_entry(self):
+		pass
 
 if __name__ == '__main__':
 	unittest.main()
