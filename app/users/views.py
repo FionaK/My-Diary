@@ -6,7 +6,6 @@ import psycopg2
 import jwt
 import re
 import base64
-from __init__ import *
 
 
 users_blueprint=Blueprint('users', __name__)
