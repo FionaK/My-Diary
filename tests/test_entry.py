@@ -14,7 +14,23 @@ class EntriesTestCase (unittest.TestCase):
 		with app.test_client(self) as tester:
 			response =tester.get('/api/v2/create_entry/')
 			self.assertEqual(tester.post('api/v2/create_entry',
-				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 301)		
+				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 301)
+
+	def test_create_entry(self):
+		with app.test_client(self) as tester:
+			response =tester.get('/api/v2/modify_entry/')
+			self.assertEqual(tester.post('api/v2/create_entry/',
+				content_type='application/json', 
+				headers={'x-access-token':"zsdxgfchgvh"},
+			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 408)
+
+	def test_create_entry(self):
+		with app.test_client(self) as tester:
+			response =tester.get('/api/v2/create_entry/')
+			self.assertEqual(tester.post('api/v2/create_entry/',
+				content_type='application/json', 
+				headers={'x-access-token':""},
+			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 403)						
 
 	def test_display_entry(self):
 		self.assertEqual(app.test_client(self).get('/api/v2/display_entry/').status_code, 403)
