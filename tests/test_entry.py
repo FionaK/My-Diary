@@ -39,11 +39,6 @@ class EntriesTestCase (unittest.TestCase):
 			,content_type='application/json',)
 		self.assertEqual(response.status_code, 405)
 					
-	def test_wrong_method(self):
-		z = app.test_client(self)
-		response = z.post('api/v2/modify_entry/4')
-        self.assertEqual(z.post('api/v2/modify_entry',
-        	json = {"title":"morning", "entry":"happy morning"}).status_code, 403)
 
 	def test_require_auth(self):
 		pass
