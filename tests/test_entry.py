@@ -9,6 +9,18 @@ class EntriesTestCase (unittest.TestCase):
 		response= tester.get('/api/v2/', content_type='application/json')
 		self.assertEqual(response.status_code, 200)
 
+	def test_home(self):
+		tester= app.test_client(self)
+		response= tester.post('/api/v2/', content_type='application/json')
+		self.assertEqual(response.status_code, 405)
+
+	def test_home(self):
+		tester= app.test_client(self)
+		response= tester.get('/api/v', content_type='application/json')
+		self.assertEqual(response.status_code, 404)
+	
+	
+
 	def test_create_entry(self):
 		with app.test_client(self) as tester:
 			response =tester.get('/api/v2/create_entry/')
@@ -23,6 +35,12 @@ class EntriesTestCase (unittest.TestCase):
 		response= tester.get('api/v2/single_entry/4', 
 			content_type='application/json')
 		self.assertEqual(response.status_code, 403)
+	def test_single_entry(self):
+		tester= app.test_client(self)
+		response= tester.get('api/v2single_entry4', 
+			content_type='application/json')
+		self.assertEqual(response.status_code, 404)
+	
 
 	def test_delete_entry(self):
 		with app.test_client(self) as k:

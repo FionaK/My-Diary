@@ -21,12 +21,12 @@ class Users_TestCase(unittest.TestCase):
 		tester= app.test_client(self)
 		response =tester.get('/api/v2/login/')
 		self.assertEqual(tester.post('/api/v2/login/',
-			json={"username":"fifi","password":""}).status_code, 401)	
-	def test_login(self):
+			json={"username":"fifi","password":" 67"}).status_code, 401)	
+	def test_login(self): 
 		tester= app.test_client(self)
 		response =tester.get('/api/v2/login/')
 		self.assertEqual(tester.post('/api/v2/login/',
-			json={"username":"","password":"fifi23456"}).status_code, 401)	
+			json={"username":" fi", "password":"fifi23456"}).status_code, 401)	
 
 	def test_register(self):
 		with app.test_client(self) as f:
@@ -38,8 +38,20 @@ class Users_TestCase(unittest.TestCase):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register/',
-				json={"name":"","username":"fifi","password":"2345", "repeat_password": "2345","email":"fko@gmail.com"}).status_code, 406)		
-    	def test_register(self):
+				json={"name":"","username":"fifi","password":"2345", "repeat_password": "2345","email":"fko@gmail.com"}).status_code, 406)	
+
+	def test_register(self):
+		with app.test_client(self) as f:
+			response = f.post('/api/v2/register/')
+			self.assertEqual(f.post('/api/v2/register/',
+				json={"name":"","username":"fifi","password":"2345", "repeat_password": "2345","email":"fkomail.com"}).status_code, 403)
+	def test_register(self):
+		with app.test_client(self) as f:
+			response = f.post('/api/v2/register/')
+			self.assertEqual(f.post('/api/v2/register/',
+				json={"name":"","username":"","password":"2345", "repeat_password": "2345","email":"fko@gmail.com"}).status_code, 406)				
+
+	def test_register(self):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register/',
@@ -49,6 +61,17 @@ class Users_TestCase(unittest.TestCase):
 		res = app.test_client(self)
 		response= res.get('/api/v2/logout/', content_type='application/json')
 		self.assertEqual(response.status_code, 200)
+
+	def test_logout(self):
+		res = app.test_client(self)
+		response= res.get('/api/v2/logout', content_type='application/json')
+		self.assertEqual(response.status_code, 404)
+
+	def test_logout(self):
+		res = app.test_client(self)
+		response= res.post('/api/v2/logout/', content_type='application/json')
+		self.assertEqual(response.status_code, 405)	
+	
 
 
 		
