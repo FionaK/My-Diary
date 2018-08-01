@@ -25,7 +25,7 @@ class EntriesTestCase (unittest.TestCase):
 		with app.test_client(self) as tester:
 			response =tester.get('/api/v2/create_entry/')
 			self.assertEqual(tester.post('api/v2/create_entry',
-				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 301)
+				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 301)		
 
 	def test_display_entry(self):
 		self.assertEqual(app.test_client(self).get('/api/v2/display_entry/').status_code, 403)
@@ -47,19 +47,16 @@ class EntriesTestCase (unittest.TestCase):
 			response = k.get('/api/v2/delete_entry/', content_type='application/json')
 			self.assertEqual(response.status_code, 404)
 		with app.test_client(self) as j:
-			response = j.post('/api/v2/delete_entry/5', content_type='application/json')
-			self.assertEqual(response.status_code, 405)
+			response = j.delete('/api/v2/delete_entry/5', content_type='application/json')
+			self.assertEqual(response.status_code, 403)
 
 	def test_modify_entry(self):
-		t = app.test_client(self)
-		response = t.get(
-			'api/v2/modify_entry/3'
-			,content_type='application/json',)
-		self.assertEqual(response.status_code, 405)
-					
-
-	def test_require_auth(self):
-		pass
+		with app.test_client(self) as tester:
+			response =tester.get('/api/v2/create_entry/')
+			self.assertEqual(tester.put('api/v2/create_entry',
+				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 405)
+		
+			
 
 if __name__ == '__main__':
 	unittest.main()
