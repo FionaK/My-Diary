@@ -22,7 +22,7 @@ class Users_TestCase(unittest.TestCase):
 		with app.test_client(self) as f:
 			response = f.get('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register',
-				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345", "email":"fko@gmail.com"}).status_code, 301)
+				json={"name":"fiona","username":"fii","password":"2345", "repeat_password": "2345", "email":"fko@gmail.com"}).status_code, 406)
 
 	def test_register(self):
 		with app.test_client(self) as f:
@@ -34,7 +34,7 @@ class Users_TestCase(unittest.TestCase):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register/',
-				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":"fkomail.com"}).status_code, 403)
+				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":"fkomail.com"}).status_code, 417)
 	def test_register(self):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
