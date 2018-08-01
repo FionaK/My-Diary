@@ -39,7 +39,17 @@ class Users_TestCase(unittest.TestCase):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register/',
-				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":""}).status_code, 406)				
+				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":""}).status_code, 406)
+	def test_register(self):
+		with app.test_client(self) as f:
+			response = f.post('/api/v2/register/')
+			self.assertEqual(f.post('/api/v2/register/',
+				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":"fi@gmail.com"}).status_code, 409)
+	def test_register(self):
+		with app.test_client(self) as f:
+			response = f.post('/api/v2/register/')
+			self.assertEqual(f.post('/api/v2/register/',
+				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "2345","email":"fi@gmail.com"}).status_code, 409)				
 
 	def test_register(self):
 		with app.test_client(self) as f:
