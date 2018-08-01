@@ -21,10 +21,10 @@ class EntriesTestCase (unittest.TestCase):
 				headers={'x-access-token':"zsdxgfchgvh"},
 			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 408)
 		with app.test_client(self) as tester:
-			self.assertEqual(tester.post('api/v2/create_entry/',
+			self.assertEqual(tester.get('api/v2/create_entry/',
 				content_type='application/json', 
 				headers={'x-access-token':""},
-			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 403)		
+			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 405)	
 
 	def test_display_entry(self):
 		self.assertEqual(app.test_client(self).get('/api/v2/display_entry/').status_code, 403)
