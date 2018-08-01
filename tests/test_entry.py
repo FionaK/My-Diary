@@ -37,6 +37,11 @@ class EntriesTestCase (unittest.TestCase):
 			content_type='application/json', 
 			headers={'x-access-token':"zsdxgfchgvh"})
 		self.assertEqual(response.status_code, 408)
+		tester= app.test_client(self)
+		response= tester.delete('api/v2/single_entry/4', 
+			content_type='application/json', 
+			headers={'x-access-token':""})
+		self.assertEqual(response.status_code, 405)
 
 	def test_single_entry(self):
 		tester= app.test_client(self)
@@ -45,7 +50,6 @@ class EntriesTestCase (unittest.TestCase):
 			headers={'x-access-token':""})
 		self.assertEqual(response.status_code, 403)	
 	
-
 	def test_delete_entry(self):
 		with app.test_client(self) as k:
 			response = k.delete('/api/v2/delete_entry/6', content_type='application/json')
@@ -55,24 +59,28 @@ class EntriesTestCase (unittest.TestCase):
 			 content_type='application/json',
 			headers={'x-access-token':"zsdxgfchgvh"})
 			self.assertEqual(response.status_code, 408)
+		with app.test_client(self) as j:
+			response = j.post('/api/v2/delete_entry/5',
+			 content_type='application/json',
+			headers={'x-access-token':"zsdxgfchgvh"})
+			self.assertEqual(response.status_code, 405)	
 
 	def test_modify_entry(self):
 		with app.test_client(self) as tester:
-			response =tester.get('/api/v2/modify_entry/')
 			self.assertEqual(tester.put('api/v2/modify_entry/7',
 				content_type='application/json', 
 				headers={'x-access-token':"zsdxgfchgvh"},
 			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 408)
-
-	def test_modify_entry(self):
 		with app.test_client(self) as tester:
-			response =tester.get('/api/v2/modify_entry/')
 			self.assertEqual(tester.put('api/v2/modify_entry/7',
 				content_type='application/json', 
 				headers={'x-access-token':""},
 			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 403)		
-		
-			
+		with app.test_client(self) as tester:
+			self.assertEqual(tester.post('api/v2/modify_entry/7',
+				content_type='application/json', 
+			json = {"entry":"Happiness is addictive"}).status_code, 405)
+	
 
 if __name__ == '__main__':
 	unittest.main()
