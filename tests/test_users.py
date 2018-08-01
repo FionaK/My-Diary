@@ -28,9 +28,6 @@ class Users_TestCase(unittest.TestCase):
 		e = app.test_client(self)
 		response= e.get('/api/v2/logout/', content_type='application/json')
 		self.assertEqual(response.status_code, 200)
-
-	def test_users(self):
-		pass
 		
 	def test_valid_email(self):
 		pass
