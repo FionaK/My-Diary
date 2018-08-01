@@ -19,15 +19,15 @@ class Users_TestCase(unittest.TestCase):
 	def test_login(self):
 		tester= app.test_client(self)
 		response =tester.post('/api/v2/login/')
-		self.assertEqual(tester.post('/api/v2/login',content_type='application/json',
-		 json={"username":"fifi","password":"2345"}).status_code, 301)	
+		self.assertEqual(tester.post('/api/v2/login/',content_type='application/json',
+		 json={"username":"fifi","password":"2345"}).status_code, 301)
 
 	def test_register(self):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
 			self.assertEqual(f.post('/api/v2/register',content_type='application/json',
 				json={"name":"fiona","username":"fii","password":"2345", "repeat_password": "2345", 
-				"email":"fko@gmail.com"}).status_code, 301)
+				"email":"fko@gmail.com"}).status_code, 401)
 
 	def test_register(self):
 		with app.test_client(self) as f:
@@ -64,7 +64,7 @@ class Users_TestCase(unittest.TestCase):
 	def test_register(self):
 		with app.test_client(self) as f:
 			response = f.post('/api/v2/register/')
-			self.assertEqual(f.post('/api/v2/register/',
+			self.assertEqual(f.post('/api/v2/register/',content_type='application/json',
 				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "25",
 				"email":"fko@gmail.com"}).status_code, 403)	
 
@@ -72,6 +72,9 @@ class Users_TestCase(unittest.TestCase):
 		res = app.test_client(self)
 		response= res.get('/api/v2/logout/', content_type='application/json')
 		self.assertEqual(response.status_code, 200)
+		res = app.test_client(self)
+		response= res.post('/api/v2/logout/', content_type='application/json')
+		self.assertEqual(response.status_code, 405)
 
 		
 
