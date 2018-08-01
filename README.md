@@ -43,9 +43,9 @@ $ service postgresql start
 $ sudo -u postgres psql
 $ CREATE DATABASE diary;
 ```
-* On the models.py file edit this with your details;
+* Create a connection;
 ```sh
-conn = psycopg2.connect("dbname='diary' user = '' password = '' host = 'localhost' port = '5432'")
+conn = psycopg2.connect("dbname='diary' user = 'postgres' password = 'fifi' host = 'localhost' port = '5432'")
 ```
 
 ###Endpoints
@@ -65,31 +65,30 @@ http://127.0.0.1:5000/api/v2/login/
   * username
   * password
 ```sh
-http://127.0.0.1:5000/api/v2/create_entry/?access_token={}
+http://127.0.0.1:5000/api/v2/create_entry/
 ```
   * title
   * entry
   * username
 ```sh
-http://127.0.0.1:5000/api/v2/display_entry/?access_token={}
+http://127.0.0.1:5000/api/v2/display_entry/
 ```
 ```sh
-http://127.0.0.1:5000/api/v2/single_entry/5?access_token={}
+http://127.0.0.1:5000/api/v2/single_entry/5
 ```
 ```sh
-http://127.0.0.1:5000/api/v2/delete_entry/1?access_token={}
+http://127.0.0.1:5000/api/v2/delete_entry/1
 ```
 ```sh
-http://127.0.0.1:5000/api/v2/modify_entry/2?access_token={}
+http://127.0.0.1:5000/api/v2/modify_entry/2
 ```
  * title
  * entry
  * username
 ```sh
-http://127.0.0.1:5000/api/v2/get_user/?access_token={}
+http://127.0.0.1:5000/api/v2/get_user/
 ```
 ### heroku link
-```sh
 [link to heroku](https://diary25.herokuapp.com/api/v2/)
-```
+
 
