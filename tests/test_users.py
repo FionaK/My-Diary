@@ -16,17 +16,7 @@ class Users_TestCase(unittest.TestCase):
 		tester= app.test_client(self)
 		response =tester.get('/api/v2/login/')
 		self.assertEqual(tester.post('/api/v2/login',
-			json={"username":"fifi","password":"2345"}).status_code, 301)
-	def test_login(self):
-		tester= app.test_client(self)
-		response =tester.get('/api/v2/login/')
-		self.assertEqual(tester.post('/api/v2/login/',
-			json={"username":"fifi","password":" 67"}).status_code, 401)	
-	def test_login(self): 
-		tester= app.test_client(self)
-		response =tester.get('/api/v2/login/')
-		self.assertEqual(tester.post('/api/v2/login/',
-			json={"username":" fi", "password":"fifi23456"}).status_code, 401)	
+			json={"username":"fifi","password":"2345"}).status_code, 301)	
 
 	def test_register(self):
 		with app.test_client(self) as f:
