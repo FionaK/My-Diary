@@ -6,7 +6,6 @@ import psycopg2
 import jwt
 from __init__ import *
 
-
 entries_blueprint = Blueprint('entries', __name__)
 def require_auth(k):
 	@wraps(k)
@@ -21,8 +20,6 @@ def require_auth(k):
 		return k(*args, **kwargs)
 		
 	return authorization
-
-
 
 @entries_blueprint.route('/api/v2/create_entry/', methods=['POST'])
 @require_auth
@@ -42,8 +39,6 @@ def create_entry():
 		return jsonify({'message': 'New entry has been created'}), 200
 	except KeyError:
 		return jsonify({'message':'Field can not be blank'}), 406
-
-
 		
 @entries_blueprint.route('/api/v2/display_entry/', methods= ['GET'])
 @require_auth
@@ -92,13 +87,3 @@ def modify_entry(entryid):
 	
 	conn.commit()
 	return jsonify({'message': 'Your entry has been modified'}), 200
-
-
-		
-		
-
-
-
-
-
-
