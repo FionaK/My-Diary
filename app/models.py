@@ -12,4 +12,9 @@ def create_tables():
 		cur.execute("CREATE TABLE IF NOT EXISTS entries (entryid serial PRIMARY KEY, title VARCHAR(250) NOT NULL,entry TEXT NOT NULL, username VARCHAR(150) NOT NULL, time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)")	
 
 	conn.commit()	
+def create_table_detail():
+	connection = psycopg2.connect("dbname='test' user='postgres' password='fifi' host='localhost' port = '5432'")
+	with conn.cusor() as cusor:
+		cur.execute("CREATE TABLE IF NOT EXISTS details(userid serial PRIMARY KEY,name VARCHAR(150) NOT NULL,username VARCHAR(150) NOT NULL,password VARCHAR(100) NOT NULL, email VARCHAR(150) NOT NULL, time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)")
 
+	connection.commit()	

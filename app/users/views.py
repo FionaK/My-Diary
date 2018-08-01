@@ -60,10 +60,10 @@ def register():
 					if valid_email(email):
 						cur.execute("INSERT INTO users(name,username,password,email)VALUES(%s, %s, %s, %s);",(name, username, password, email))
 					else:
-						return jsonify({'message':'invalid email format'})
+						return jsonify({'message':'invalid email format'}), 417
 	
 				else:
-					return jsonify({'message':'wrong password format'})
+					return jsonify({'message':'wrong password format'}), 417
 			
 			else:
 				return jsonify({'message': 'username or email already taken'}), 409
