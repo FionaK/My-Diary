@@ -8,17 +8,6 @@ class EntriesTestCase (unittest.TestCase):
 		tester= app.test_client(self)
 		response= tester.get('/api/v2/', content_type='application/json')
 		self.assertEqual(response.status_code, 200)
-
-	def test_home(self):
-		tester= app.test_client(self)
-		response= tester.post('/api/v2/', content_type='application/json')
-		self.assertEqual(response.status_code, 405)
-
-	def test_home(self):
-		tester= app.test_client(self)
-		response= tester.get('/api/v', content_type='application/json')
-		self.assertEqual(response.status_code, 404)
-	
 	
 
 	def test_create_entry(self):
@@ -33,28 +22,43 @@ class EntriesTestCase (unittest.TestCase):
 	def test_single_entry(self):
 		tester= app.test_client(self)
 		response= tester.get('api/v2/single_entry/4', 
-			content_type='application/json')
-		self.assertEqual(response.status_code, 403)
+			content_type='application/json', 
+			headers={'x-access-token':"zsdxgfchgvh"})
+		self.assertEqual(response.status_code, 408)
+
 	def test_single_entry(self):
 		tester= app.test_client(self)
-		response= tester.get('api/v2single_entry4', 
-			content_type='application/json')
-		self.assertEqual(response.status_code, 404)
+		response= tester.get('api/v2/single_entry/4', 
+			content_type='application/json', 
+			headers={'x-access-token':""})
+		self.assertEqual(response.status_code, 403)	
 	
 
 	def test_delete_entry(self):
 		with app.test_client(self) as k:
-			response = k.get('/api/v2/delete_entry/', content_type='application/json')
-			self.assertEqual(response.status_code, 404)
-		with app.test_client(self) as j:
-			response = j.delete('/api/v2/delete_entry/5', content_type='application/json')
+			response = k.delete('/api/v2/delete_entry/6', content_type='application/json')
 			self.assertEqual(response.status_code, 403)
+		with app.test_client(self) as j:
+			response = j.delete('/api/v2/delete_entry/5',
+			 content_type='application/json',
+			headers={'x-access-token':"zsdxgfchgvh"})
+			self.assertEqual(response.status_code, 408)
 
 	def test_modify_entry(self):
 		with app.test_client(self) as tester:
-			response =tester.get('/api/v2/create_entry/')
-			self.assertEqual(tester.put('api/v2/create_entry',
-				json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 405)
+			response =tester.get('/api/v2/modify_entry/')
+			self.assertEqual(tester.put('api/v2/modify_entry/7',
+				content_type='application/json', 
+				headers={'x-access-token':"zsdxgfchgvh"},
+			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 408)
+
+	def test_modify_entry(self):
+		with app.test_client(self) as tester:
+			response =tester.get('/api/v2/modify_entry/')
+			self.assertEqual(tester.put('api/v2/modify_entry/7',
+				content_type='application/json', 
+				headers={'x-access-token':""},
+			json = {"title":"Happiness thoughts", "entry":"Happiness is addictive"}).status_code, 403)		
 		
 			
 
