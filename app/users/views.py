@@ -85,8 +85,8 @@ def login():
 					return jsonify({'message': 'Login successful', 'x-access_token': token.decode('UTF-8')}), 200
 				else:
 					return jsonify({'message':'wrong password'}), 400
-				else:
-					return jsonify({'message':'Invalid username'}), 401
+		else:
+			return jsonify({'message':'Invalid username'}), 401
 	except KeyError():
 		return jsonify({'message': 'Field can not be blank or check on the spelling'})
 					
