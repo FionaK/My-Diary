@@ -2,7 +2,6 @@ from flask import Flask, Blueprint, jsonify, request
 from app.models import *
 from functools import wraps
 import datetime
-import psycopg2
 import jwt
 import re
 import base64
