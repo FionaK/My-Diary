@@ -68,14 +68,6 @@ class Users_TestCase(unittest.TestCase):
 				json={"name":"fiona","username":"fifi","password":"2345", "repeat_password": "25",
 				"email":"fko@gmail.com"}).status_code, 403)	
 
-	def test_logout(self):
-		res = app.test_client(self)
-		response= res.get('/api/v2/logout/', content_type='application/json')
-		self.assertEqual(response.status_code, 200)
-		res = app.test_client(self)
-		response= res.post('/api/v2/logout/', content_type='application/json')
-		self.assertEqual(response.status_code, 405)
-
 		
 
 if __name__ == '__main__':
