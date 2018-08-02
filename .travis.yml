@@ -17,7 +17,7 @@ before_script:
 
 script:
 - pytest tests
-- pytest --cov=app
+- pytest --cov=.
 
 after_success:
  - coveralls
