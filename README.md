@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/FionaK/My-Diary.svg?branch=challenge3)](https://travis-ci.org/FionaK/My-Diary)
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c418889a39e570ccd2c5/maintainability)](https://codeclimate.com/github/FionaK/My-Diary/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/FionaK/My-Diary/badge.svg)](https://coveralls.io/github/FionaK/My-Diary)
+[![Coverage Status](https://coveralls.io/repos/github/FionaK/My-Diary/badge.svg?branch=challenge3)](https://coveralls.io/github/FionaK/My-Diary?branch=challenge3)
 # My-Diary
   > Online diary that allows a user to make new entries, delete or modify an existing entry.
 
