@@ -29,11 +29,15 @@ def create_entry():
 		entry=request.get_json()['entry'].strip()
 		data = jwt.decode(request.headers.get('x-access_token'), 'fifi')
 		username = data['user']
-		cur.execute("SELECT * FROM entries WHERE title = '"+title+"'" )
-		if cur.fetchone() is None:
-			cur.execute("INSERT INTO entries(title,entry,username)VALUES(%s, %s, %s);",(title, entry, username))
+		if len(title)==0 or len(entry)==0:
+			return jsonify({'message':'Please provide a title and an entry'}), 406
 		else:
-			return jsonify({'message': 'Title already exists. Choose another title.'})
+			cur.execute("SELECT * FROM entries WHERE title = '"+title+"'" )
+			if cur.fetchone() is None:
+				cur.execute("INSERT INTO entries(title,entry,username)VALUES(%s, %s, %s);",(title, entry, username))
+			else:
+				return jsonify({'message': 'Title already exists. Choose another title.'}), 408
+				
 		
 		conn.commit()
 		return jsonify({'message': 'New entry has been created'}), 200
@@ -78,12 +82,14 @@ def modify_entry(entryid):
 	entry=request.get_json()['entry'].strip()
 	data = jwt.decode(request.headers.get('x-access-token'), 'fifi')
 	username= data['user']
-	cur.execute("SELECT * FROM entries WHERE username = '"+username+"' AND entryid = '"+str(entryid)+"'")
-	result = cur.fetchone()
-	if result is None:
-		return jsonify({'message':'You are not authorized to modify this entry'})
-		
-	cur.execute("UPDATE entries SET title= '"+title+"', entry='"+entry+"' WHERE entryid='"+str(entryid)+"'")
+	if len(title)==0 or len(entry)==0:
+		return jsonify({'message':'Please provide a title and an entry'}), 406
+	else:
+		cur.execute("SELECT * FROM entries WHERE username = '"+username+"' AND entryid = '"+str(entryid)+"'")
+		result = cur.fetchone()
+		if result is None:
+			return jsonify({'message':'You are not authorized to modify this entry'})
+			cur.execute("UPDATE entries SET title= '"+title+"', entry='"+entry+"' WHERE entryid='"+str(entryid)+"'")
 	
 	conn.commit()
 	return jsonify({'message': 'Your entry has been modified'}), 200

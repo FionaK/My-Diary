@@ -7,6 +7,7 @@ import jwt
 import re
 import base64
 
+
 users_blueprint=Blueprint('users', __name__)
 
 def require_auth(k):
@@ -97,3 +98,4 @@ def get_user():
 @users_blueprint.route('/api/v2/logout/', methods=['GET'])
 def logout():
 	return jsonify({'message': 'Successfully logged out'})
+
