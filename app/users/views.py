@@ -69,24 +69,27 @@ def register():
 
 		return jsonify({'message': 'You are successfully registered'})
 	except KeyError:
-		return jsonify({'message':'Field can not be blank'}), 406
+		return jsonify({'message':'Field can not be blank or check on the spelling'}), 406
 
 @users_blueprint.route('/api/v2/login/', methods= ['POST'])
 def login():
-	username=request.get_json()['username'].strip()
-	password=base64.b64encode(bytes(request.get_json()['password'])).strip()
-
-	cur.execute("SELECT COUNT(1) FROM users WHERE username = '"+username+"'")
-	if cur.fetchone() is not None:
-		cur.execute("SELECT * FROM users WHERE username = '"+username+"'")
-		for row in cur.fetchall():
-			if password == row[3]:
-				token= jwt.encode ({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, 'fifi')
-				return jsonify({'message': 'Login successful', 'x-access_token': token.decode('UTF-8')}), 200
-			else:
-				return jsonify({'message':'wrong password'}), 401
-	else:
-		return jsonify({'message':'Invalid username'}), 401
+	try:
+		username=request.get_json()['username'].strip()
+		password=base64.b64encode(bytes(request.get_json()['password'])).strip()
+		cur.execute("SELECT COUNT(1) FROM users WHERE username = '"+username+"'")
+		if cur.fetchone() is not None:
+			cur.execute("SELECT * FROM users WHERE username = '"+username+"'")
+			for row in cur.fetchall():
+				if password == row[3]:
+					token= jwt.encode ({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, 'fifi')
+					return jsonify({'message': 'Login successful', 'x-access_token': token.decode('UTF-8')}), 200
+				else:
+					return jsonify({'message':'wrong password'}), 400
+				else:
+					return jsonify({'message':'Invalid username'}), 401
+	except KeyError():
+		return jsonify({'message': 'Field can not be blank or check on the spelling'})
+					
 
 @users_blueprint.route('/api/v2/get_user/', methods=['GET'])
 @require_auth
@@ -94,8 +97,3 @@ def get_user():
 	cur.execute("SELECT * FROM users")
 	users=cur.fetchall()
 	return jsonify(users), 200
-
-@users_blueprint.route('/api/v2/logout/', methods=['GET'])
-def logout():
-	return jsonify({'message': 'Successfully logged out'})
-

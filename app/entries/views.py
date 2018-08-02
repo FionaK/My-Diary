@@ -42,7 +42,7 @@ def create_entry():
 		conn.commit()
 		return jsonify({'message': 'New entry has been created'}), 200
 	except KeyError:
-		return jsonify({'message':'Field can not be blank'}), 406
+		return jsonify({'message':'Field can not be blank or check on the spelling'}), 406
 		
 @entries_blueprint.route('/api/v2/display_entry/', methods= ['GET'])
 @require_auth
