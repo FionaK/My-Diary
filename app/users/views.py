@@ -7,7 +7,6 @@ import jwt
 import re
 import base64
 
-
 users_blueprint=Blueprint('users', __name__)
 
 def require_auth(k):
@@ -83,13 +82,10 @@ def login():
 				if password == row[3]:
 					token= jwt.encode ({'user':username, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, 'fifi')
 					return jsonify({'message': 'Login successful', 'x-access_token': token.decode('UTF-8')}), 200
-				else:
-					return jsonify({'message':'wrong password'}), 400
-		else:
-			return jsonify({'message':'Invalid username'}), 401
+				return jsonify({'message':'wrong password'}), 400
+		return jsonify({'message':'Invalid username'}), 401
 	except KeyError():
 		return jsonify({'message': 'Field can not be blank or check on the spelling'})
-					
 
 @users_blueprint.route('/api/v2/get_user/', methods=['GET'])
 @require_auth
