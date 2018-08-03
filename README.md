@@ -89,6 +89,6 @@ http://127.0.0.1:5000/api/v2/modify_entry/2
 http://127.0.0.1:5000/api/v2/get_user/
 ```
 ### heroku link
-[link to heroku](https://diary25.herokuapp.com/api/v2/)
+[link to heroku](https://diary16.herokuapp.com/api/v2/)
 
 
